@@ -25,7 +25,7 @@ SECRET_KEY = 'w&9git1#k3pfgq5j%m2sy$j4stwc9)o-)l+se&cd_jnd(kg2_9'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', '.pythonanywhere.com']
 
 
 # Application definition
@@ -37,10 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework',
-    'django.contrib.sites',
+    #'django.contrib.sites',
     'django.contrib.sitemaps',
-    #'accountAPI',
+    'rest_framework',
     'vmain',
 ]
 
@@ -77,7 +76,6 @@ WSGI_APPLICATION = 'vdeleAPI.wsgi.application'
 
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
-    'account.authentication.EmailAuthBackend',
 )
 
 MEDIA_URL = '/media/'
@@ -134,4 +132,4 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-ALLOWED_HOSTS = ['127.0.0.1', '.pythonanywhere.com']
+

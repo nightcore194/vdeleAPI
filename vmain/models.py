@@ -6,14 +6,13 @@ class User(models.Model): #модель юзера
 
     def __str__(self):
         return self.user_name
-        return self.user_email
 
 class UserData(models.Model): #модель соц. сети
-    user_social_vk = models.URLField(max_length=40)
-    user_social_inst = models.URLField(max_length=40)
+    user_social_vk = models.URLField()
+    user_social_inst = models.URLField()
+    user = models.ForeignKey('User', on_delete=models.CASCADE,)
 
     def __str__(self):
         return self.user_social_vk
-        return self.user_social_inst
 
-# Create your models here.
+
