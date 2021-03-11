@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.sitemaps',
     'rest_framework',
     'vmain',
+    'front',
 ]
 
 MIDDLEWARE = [
