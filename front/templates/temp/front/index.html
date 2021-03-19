@@ -3,13 +3,24 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>React_working</title>
+    <title>main_page</title>
 </head>
 <body>
-<div id="app">
-    <!-- React will load here -->
-</div>
+{% block content %}
+    <div id="app">
+        <!-- React will load here -->
+    </div>
+    {% if vkuser.is_none %}
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit">Авторизоваться</button>
+        </form>
+    {% else %}
+        <form method="get">
+
+        </form>
+    {% endif %}
+{% endblock %}
 </body>
-    {% load static %}
-    <script src="{% static "front/main.js" %}"></script>
+
 </html>

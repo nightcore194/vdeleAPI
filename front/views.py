@@ -1,4 +1,7 @@
 from django.shortcuts import render, redirect
+from vkauth import views
 
 def index(request):
-    return render(request, "temp/front/index.html")
+    if request.method == "POST":
+        return redirect("/authvk")
+    return render(request, 'temp/front/index.html')

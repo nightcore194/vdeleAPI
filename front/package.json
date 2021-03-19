@@ -26,5 +26,8 @@
       "@babel/preset-env",
       "@babel/preset-react"
     ]
+  },
+  "dependencies": {
+    "vkflow": "^1.0.1"
   }
 }

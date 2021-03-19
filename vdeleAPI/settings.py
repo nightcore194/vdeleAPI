@@ -37,11 +37,16 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    #'django.contrib.sites',
     'django.contrib.sitemaps',
+    'django.contrib.sites',
+    'social_django',
+    'oauth2_provider',
+    'rest_framework_social_oauth2',
     'rest_framework',
+    'allauth',
     'vmain',
     'front',
+    'vkauth'
 ]
 
 MIDDLEWARE = [
@@ -72,11 +77,15 @@ TEMPLATES = [
         },
     },
 ]
-
+SOCIAL_AUTH_VK_OAUTH2_KEY = '7793937'
+SOCIAL_AUTH_VK_OAUTH2_SECRET = 'nF4RwRYNCNpOD74RV2R6'
+SOCIAL_AUTH_VK_OAUTH2_SCOPE = ['email']
 WSGI_APPLICATION = 'vdeleAPI.wsgi.application'
-
+SITE_ID = '1'
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
+    'social_core.backends.vk.VKOAuth2',
+    'rest_framework_social_oauth2.backends.DjangoOAuth2',
 )
 
 MEDIA_URL = '/media/'
@@ -112,7 +121,7 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
+LOGIN_REDIRECT_URL = '/authvk'
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
