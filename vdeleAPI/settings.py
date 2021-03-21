@@ -73,13 +73,15 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect'
             ],
         },
     },
 ]
 SOCIAL_AUTH_VK_OAUTH2_KEY = '7793937'
 SOCIAL_AUTH_VK_OAUTH2_SECRET = 'nF4RwRYNCNpOD74RV2R6'
-SOCIAL_AUTH_VK_OAUTH2_SCOPE = ['email']
+SOCIAL_AUTH_VK_OAUTH2_SCOPE = ['email', 'first_name']
 WSGI_APPLICATION = 'vdeleAPI.wsgi.application'
 SITE_ID = '1'
 AUTHENTICATION_BACKENDS = (

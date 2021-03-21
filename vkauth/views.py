@@ -1,17 +1,20 @@
 from django.shortcuts import render, redirect
-from social_django.models import AbstractUserSocialAuth
+from social_django.models import  UserSocialAuth
 from .models import vk_user_id, vk_user_token
 import json
+from rest_framework import serializers
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.decorators import login_required
 import vk_api, os
 
 #login form vk
 def login (request):
-    if request.method == "POST":
-        deser = json.loads(AbstractUserSocialAuth.extra_data()) #десериализация
+    if request.method == "GET":
+        deserid = UserSocialAuth()
+        #deser = deserid.extra_data
+        #deser = json.loads(str(deser)) #десериализация
         vk_id = vk_user_id()
-        vk_id.login = deser['id']
+        vk_id.login = deserid.extra_data
         vk_token = vk_user_token
         vk_token.token = deser['access_token']
         vk_id.save()

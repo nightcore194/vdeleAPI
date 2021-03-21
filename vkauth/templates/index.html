@@ -6,7 +6,7 @@
 </head>
 <body>
 {% load i18n %}
-    <form method="post">
+    <form method="get">
         {% csrf_token %}
         <a href="{% url 'social:begin' 'vk-oauth2' %}"><p>Авторизация через ВК</p></a>
         <a href="/logout">Выйти</a>
