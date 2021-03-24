@@ -14,6 +14,8 @@ class vk_user_token(models.Model): #access_token
     def __str__(self):
         return self.token
 
-#class vk_user_stat(models.Model):
-    #response = models.CharField(on_delete=models.CASCADE)
-    #ac
+class vk_user_stat(models.Model):
+    reach_by_week = models.CharField(max_length=1000)
+
+    def __str__(self):
+        return self.reach_by_week

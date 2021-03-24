@@ -10,14 +10,14 @@
     <div id="app">
         <!-- React will load here -->
     </div>
-    {% if vkuser.is_none %}
+    {% if user.is_none %}
         <form method="post">
             {% csrf_token %}
             <button type="submit">Авторизоваться</button>
         </form>
     {% else %}
         <form method="get">
-
+            <button type="submit">Продолжить работу в системе</button>
         </form>
     {% endif %}
 {% endblock %}
