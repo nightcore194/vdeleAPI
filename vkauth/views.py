@@ -25,16 +25,29 @@ def logout (request):
 #stat
 @login_required(login_url='/auth')
 def get_stat(request):
+    #get token & user
+    user_data = UserSocialAuth()
+    user_data = json.dumps(UserSocialAuth.extra_data)
+    user_login = vk_user_id()
+    user_token = vk_user_token()
+    user_token.login = user_login.login
+    user_token.token = json.loads(user_data["access_token"])
+    #auth login
     vk_stat = vk_api.VkApi(login='89223209959', token='e9f3482b8e31e3d8de7bb6344465006e7dd910da17af915efddcf0b50d79e0bc183888e6a857ebd802931')
     vk_stat.auth(token_only=True)
     vk = vk_stat.get_api()
     vk_stat_get = vk_user_stat()
+    #get group
     vkgroup = vk.groups.get(id='194890660', filter='admin')
-    vkgroup = json.dumps(vkgroup[0]['items'])
+    vkgroup = json.dumps(vkgroup["items"])
     vkgroup = json.loads(vkgroup)
-    vks = vk.stats.get(group_id=vkgroup['id'], interval='week', intervals_count=1, stats_group='reach', extended=0)
+    #get stats
+    vks = vk.stats.get(group_id=vkgroup[0], interval='week', intervals_count=1, stats_group='reach', extended=0)
     vks = json.dumps(vks[0]["reach"])
     vks = json.loads(vks)
     vk_stat_get.reach_by_week = vks["reach"]
+    #save
     vk_stat_get.save()
+    user_login.save()
+    user_token.save()
     return render(request, 'stat.html')
