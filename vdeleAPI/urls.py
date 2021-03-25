@@ -22,7 +22,6 @@ from django.urls import path
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('vmain.urls')),
-    path('', include('front.urls')),
     path('', include('vkauth.urls')),
     path('', include('social_django.urls')),
     path('', include('allauth.urls')),

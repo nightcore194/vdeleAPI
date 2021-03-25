@@ -45,7 +45,6 @@ INSTALLED_APPS = [
     'rest_framework',
     'allauth',
     'vmain',
-    'front',
     'vkauth'
 ]
 
@@ -81,7 +80,10 @@ TEMPLATES = [
 ]
 SOCIAL_AUTH_VK_OAUTH2_KEY = '7793937'
 SOCIAL_AUTH_VK_OAUTH2_SECRET = 'nF4RwRYNCNpOD74RV2R6'
-SOCIAL_AUTH_VK_OAUTH2_SCOPE = ['email', 'first_name']
+SOCIAL_AUTH_VK_OAUTH2_SCOPE = ['email', 'offline', 'stats', 'group']
+SOCIAL_AUTH_VK_OAUTH2_EXTRA_DATA = [
+    ('email', 'email')
+]
 WSGI_APPLICATION = 'vdeleAPI.wsgi.application'
 SITE_ID = '1'
 AUTHENTICATION_BACKENDS = (
@@ -123,7 +125,7 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-LOGIN_REDIRECT_URL = '/authvk'
+LOGIN_REDIRECT_URL = '/stat'
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/

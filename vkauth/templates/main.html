@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>main_page</title>
+</head>
+<body>
+{% block content %}
+    <div id="app">
+        <!-- React will load here -->
+    </div>
+    {% if user.is_authenticated %}
+    {% else %}
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit">Авторизоваться</button>
+        </form>
+    {% endif %}
+{% endblock %}
+</body>
+
+</html>

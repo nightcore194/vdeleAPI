@@ -1,13 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Статистика</title>
-</head>
-<body>
+{% extends "main.html" %}
+{% block title %}Статистика{% endblock %}
+{% block content %}
     <form method="get">
-        <p></p>
-        <a href="/logout">Выйти</a>
+        <p> </p>
     </form>
-</body>
-</html>
+    {% if user.is_authenticated %}
+    <a href="/logout">Выйти</a>
+    {% endif %}
+{% endblock %}
