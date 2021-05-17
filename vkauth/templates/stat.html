@@ -1,10 +1,24 @@
 {% extends "main.html" %}
 {% block title %}Статистика{% endblock %}
 {% block content %}
-    <form method="get">
-        <p> </p>
-    </form>
     {% if user.is_authenticated %}
     <a href="/logout">Выйти</a>
+    {% endif %}
+    {% if  user_group == NULL %}
+        <form method="post">
+            <div>
+                {% csrf_token %}
+                {% for mass in mas %}
+                    <p><input type="radio" required name="group" value={{ mass }}>{{ mass }}</p>
+                {% endfor %}
+            </div>
+            <div>
+                <p><button type="submit">Далее</button></p>
+            </div>
+        </form>
+    {% else %}
+        <div>
+        <p>{{ stat }}</p>
+        </div>
     {% endif %}
 {% endblock %}

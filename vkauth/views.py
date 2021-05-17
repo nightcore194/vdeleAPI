@@ -17,7 +17,7 @@ def index(request):
 def login (request):
     if request.user.is_authenticated:
         return redirect('/stat')
-    return render(request, 'index.html')
+    return render(request, 'auth_index.html')
 #logout
 def logout (request):
     auth_logout(request)
@@ -41,16 +41,26 @@ def get_stat(request):
     vkgroup = requests.get("https://api.vk.com/method/groups.get?id="+str(user_data_parser["id"])+"&filter=admin&access_token="+str(user_data_parser["access_token"])+"&v=5.130")
     vkgroupjs = vkgroup.json()
     vkgroupjs = vkgroupjs["response"]
-    vkgroupjs = vkgroupjs["items"]
-    vk_user_ids.id_user = vkgroupjs[0]
-    vk_user_ids.save()
-    #get stats
-    vks = requests.get("https://api.vk.com/method/stats.get?group_id="+str(vkgroupjs[0])+"&interval=week&intervals_count=1&stats_group=reach&extended=0&access_token="+str(user_data_parser["access_token"])+"&v=5.130")
-    vk = vks.json()
-    vkjs = vk["response"]
-    vkjs = vkjs[0]["reach"]
-    vk_stat_get.id_user_for = vk_user_id.objects.get(id_user=vkgroupjs[0])
-    vk_stat_get.reach_by_week = vkjs["reach"]
-    token.save()
-    vk_stat_get.save()
-    return render(request, 'stat.html')
+    vkgroupjsmas = vkgroupjs["items"]
+    if request.method == "POST":
+        if 'group' in request.POST:
+            mas = request.POST['group']
+            vk_user_ids.id_user = mas
+            vk_user_ids.save()
+            #get stats
+            vks = requests.get("https://api.vk.com/method/stats.get?group_id="+str(mas)+"&interval=week&intervals_count=1&stats_group=reach&extended=0&access_token="+str(user_data_parser["access_token"])+"&v=5.130")
+            vk = vks.json()
+            vkjs = vk["response"]
+            vkjs = vkjs[0]["reach"]
+            vkjs = vkjs["reach"]
+            vk_stat_get.id_user_for = vk_user_id.objects.get(id_user=mas)
+            vk_stat_get.reach_by_week = vkjs
+            token.save()
+            vk_stat_get.save()
+            return render(request, 'stat.html', {'mas': vkgroupjsmas, 'stat': vkjs, 'user_group': vk_user_ids.id_user})#настроить свявзку
+    return render(request, 'stat.html', {'mas': vkgroupjsmas, 'user_group': vk_user_ids.id_user})
+
+def stat_unity(request):
+    user = request.user.pk
+    #user_stat=vk_user_stat.objects.get(user=user)
+    return render(request, 'index.html')

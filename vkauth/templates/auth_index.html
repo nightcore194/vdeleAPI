@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Тест</title>
+</head>
+<body>
+{% load i18n %}
+    <form method="post">
+        {% csrf_token %}
+        <a href="{% url 'social:begin' 'vk-oauth2' %}"><p>Авторизация через ВК</p></a>
+        <a href="/logout">Выйти</a>
+    </form>
+</body>
+</html>
